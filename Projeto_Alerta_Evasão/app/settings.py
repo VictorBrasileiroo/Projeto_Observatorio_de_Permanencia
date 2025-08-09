@@ -80,9 +80,9 @@ WSGI_APPLICATION = 'app.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.getenv('POSTGRES_DB'),
-        'USER': os.getenv('POSTGRES_USER'),
-        'PASSWORD': os.getenv('POSTGRES_PASSWORD'),
+        'NAME': 'observatorio_permanencia',
+        'USER': 'postgres',
+        'PASSWORD': 'postgres',
         'HOST': 'db', 
         'PORT': '5432',
     }
@@ -135,7 +135,7 @@ REST_FRAMEWORK = {
 }
 
 SPECTACULAR_SETTINGS = {
-    'TITLE': 'Observatório_de_Permanência',
+    'TITLE': 'Observatório de Permanência',
     'DESCRIPTION': 'API para predição de evasão usando ML',
     'VERSION': '1.0.0',
 }
