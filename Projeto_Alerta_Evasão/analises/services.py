@@ -30,21 +30,6 @@ class ModeloPredicaoService:
         except Exception as ex:
             raise
 
-    # def _traduzir_features_para_modelo(self, dados_portugues):
-    #     return {
-    #         'Age at enrollment': dados_portugues['idade_ingresso'],
-    #         'Gender': dados_portugues['genero'],
-    #         'Daytime/evening attendance': dados_portugues['turno_aulas'],
-    #         'Scholarship holder': int(dados_portugues['bolsista']),
-    #         'Educational special needs': int(dados_portugues['necessidades_especiais']),
-    #         'Curricular units 1st sem (approved)': dados_portugues['disciplinas_aprovadas_1per'],
-    #         'Curricular units 1st sem (enrolled)': dados_portugues['disciplinas_matriculadas_1per'],
-    #         'Curricular units 1st sem (grade)': dados_portugues['nota_media_1per'],
-    #         'Curricular units 2nd sem (approved)': dados_portugues['disciplinas_aprovadas_2per'],
-    #         'Curricular units 2nd sem (enrolled)': dados_portugues['disciplinas_matriculadas_2per'],
-    #         'Curricular units 2nd sem (grade)': dados_portugues['nota_media_2per']
-    #     }    
-    
     def _converter_estudante_para_modelo(self, estudante):
         return {
             'Age at enrollment': estudante.idade_ingresso,

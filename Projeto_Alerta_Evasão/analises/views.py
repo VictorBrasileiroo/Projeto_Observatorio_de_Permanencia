@@ -4,8 +4,7 @@ from rest_framework.response import Response
 from drf_spectacular.utils import extend_schema
 from estudantes.models import Estudante
 from analises.models import PredicaoEvasao
-from .serializers import PredicaoInputSerializer, PredicaoEvasaoSerializer
-from .services import ModeloPredicaoService
+from .serializers import PredicaoEvasaoSerializer
 from .services import modelo_service
 
 @extend_schema(responses={200: dict})
