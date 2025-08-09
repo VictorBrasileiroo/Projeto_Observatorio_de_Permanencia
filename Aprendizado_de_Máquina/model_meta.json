@@ -1,0 +1,29 @@
+{
+  "model_file": "gradient_boosting_dropout.pkl",
+  "features_expected": [
+    "Age at enrollment",
+    "Gender",
+    "Daytime/evening attendance",
+    "Scholarship holder",
+    "Educational special needs",
+    "Curricular units 1st sem (approved)",
+    "Curricular units 1st sem (enrolled)",
+    "Curricular units 1st sem (grade)",
+    "Curricular units 2nd sem (approved)",
+    "Curricular units 2nd sem (enrolled)",
+    "Curricular units 2nd sem (grade)"
+  ],
+  "metrics": {
+    "AUC": 0.9615424447135299,
+    "PR-AUC": 0.9583089661649163,
+    "Accuracy": 0.9008264462809917,
+    "Precision": 0.8840579710144928,
+    "Recall": 0.8591549295774648,
+    "F1-Score": 0.8714285714285714
+  },
+  "best_threshold": 0.6102142877598777,
+  "risk_bands": {
+    "low": 0.4,
+    "high": 0.7
+  }
+}
