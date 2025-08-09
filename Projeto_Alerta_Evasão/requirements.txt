@@ -1,0 +1,9 @@
+Django>=4.2.0
+djangorestframework>=3.14.0
+drf-spectacular>=0.28.0
+drf-spectacular-sidecar>=2025.8.1
+psycopg2-binary>=2.9
+scikit-learn==1.5.2
+pandas>=2.0.0
+numpy>=1.24.0
+joblib>=1.2.0
