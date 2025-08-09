@@ -1,6 +1,7 @@
 from django.db import models
 
 class Estudante(models.Model):
+    matricula = models.CharField(max_length=9, unique=True, verbose_name="Matrícula")
     idade_ingresso = models.IntegerField(verbose_name="Idade de Ingresso")
     genero = models.IntegerField(choices=[(0, 'Feminino'), (1, 'Masculino')], verbose_name="Gênero")
     turno_aulas = models.IntegerField(choices=[(0, 'Noturno'), (1, 'Diurno')], verbose_name="Turno das Aulas")
