@@ -22,4 +22,4 @@ class Estudante(models.Model):
         ordering = ['-criado_em']
 
     def __str__(self):
-        return f"Estudante {self.id}"
+        return f"Estudante {self.matricula}"

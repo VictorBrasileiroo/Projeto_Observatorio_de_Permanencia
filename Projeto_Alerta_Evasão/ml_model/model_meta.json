@@ -23,7 +23,7 @@
   },
   "best_threshold": 0.6102142877598777,
   "risk_bands": {
-    "low": 0.4,
+    "low": 0.3,
     "high": 0.7
   }
 }
