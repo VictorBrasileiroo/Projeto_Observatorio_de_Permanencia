@@ -6,6 +6,7 @@ from estudantes.models import Estudante
 from analises.models import PredicaoEvasao
 from .serializers import PredicaoEvasaoSerializer
 from .services import modelo_service
+from django.db.models import Avg
 
 @extend_schema(responses={200: dict})
 @api_view(['POST'])
@@ -76,3 +77,46 @@ def limpar_predicoes(request):
         'mensagem': f'{total_removidas} predições removidas',
         'alunos_mantidos': Estudante.objects.count()
     })
+
+@extend_schema(responses={200:dict})
+@api_view(['GET'])
+def gerar_relatorio_das_analises(request):
+    total_alunos = Estudante.objects.count()
+    total_predicoes = PredicaoEvasao.objects.count()
+
+    risco_alto = PredicaoEvasao.objects.filter(nivel_risco='Alto').count()
+    risco_medio = PredicaoEvasao.objects.filter(nivel_risco='Médio').count()
+    risco_baixo = PredicaoEvasao.objects.filter(nivel_risco='Baixo').count()
+
+    previsao_evasao = PredicaoEvasao.objects.filter(previsao='Evasão').count()
+    previsao_nao_evasao = PredicaoEvasao.objects.filter(previsao='Não evasão').count()
+
+    alunos_analisados = PredicaoEvasao.objects.values('estudante').distinct().count()
+    alunos_nao_analisados = total_alunos - alunos_analisados
+
+    probabilidade_media_evasao = PredicaoEvasao.objects.aggregate(Avg('probabilidade'))['probabilidade__avg']
+
+    return Response({
+        'mensagem': 'relatório criado com sucesso',
+        'resumo_geral': {
+            'total_alunos_cadastrados': total_alunos,
+            'total_analises_realizadas': total_predicoes,
+            'alunos_sem_predicao': alunos_nao_analisados,
+            'cobertura_de_analises': f"{(alunos_analisados/total_alunos*100):.1f}%" if total_alunos > 0 else "0%"
+        },
+        'distribuicao_risco': {
+            'alto_risco': risco_alto,
+            'medio_risco': risco_medio,
+            'baixo_risco': risco_baixo
+        },
+        'previsoes': {
+            'evasao_prevista': previsao_evasao,
+            'nao_evasao_prevista': previsao_nao_evasao,
+            'taxa_evasao_prevista': f"{(previsao_evasao/total_predicoes*100):.1f}%" if total_predicoes > 0 else "0%"
+        },
+        'metricas': {
+            'probabilidade_media_evasao': f"{probabilidade_media_evasao:.3f}" if probabilidade_media_evasao else "N/A"
+        }
+    })
+
+
