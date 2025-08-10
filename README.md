@@ -1,4 +1,4 @@
-
+<img src="https://raw.githubusercontent.com/VictorBrasileiroo/Projeto_Observatorio_de_Permanencia/main/banner.png" alt="Banner" style="width: 100%; max-width: 800px; height: auto;"></img>
 # 📊 Observatório de Permanência
 
 ## 🌟 Introdução
