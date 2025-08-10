@@ -20,8 +20,11 @@ def analise_evasao_todos_estudantes(request):
     
     predicoes_criadas = []
     predicoes_com_erro = []
-
+    
     for estudante in estudantes:
+        if PredicaoEvasao.objects.filter(estudante=estudante).exists():
+            continue
+        
         try:
             resultado = modelo_service.prever_evasao_estudante(estudante)
 
@@ -47,14 +50,19 @@ def analise_evasao_todos_estudantes(request):
             })
             continue
 
-    return Response({
-        'mensagem': f'{len(predicoes_criadas)} predições criadas',
-        'total_alunos_analisados': estudantes.count(),
-        'predicoes_criadas': len(predicoes_criadas),
-        'predicoes_com_erro': len(predicoes_com_erro),
-        'detalhes_predicoes': predicoes_criadas,
-        'erros': predicoes_com_erro if predicoes_com_erro else None
-    })
+    if len(predicoes_criadas) == 0:
+        return Response({
+            'mensagem': 'Nenhuma predição foi realizada, pois todos os alunos já possuem predições cadastradas ou não há alunos disponíveis'
+        })
+    else:
+        return Response({
+            'mensagem': f'{len(predicoes_criadas)} predições criadas',
+            'total_alunos_analisados': estudantes.count(),
+            'predicoes_criadas': len(predicoes_criadas),
+            'predicoes_com_erro': len(predicoes_com_erro),
+            'detalhes_predicoes': predicoes_criadas,
+            'erros': predicoes_com_erro if predicoes_com_erro else None
+        })
 
 @extend_schema(responses={200: PredicaoEvasaoSerializer(many=True)})
 @api_view(['GET'])

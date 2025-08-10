@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard de Análise de Evasão Estudantil</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>Dashboard de Análise de Evasão Estudantil</h1>
+            <p class="header__subtitle">Análise atualizada em 10 de Agosto, 2025 • Sistema Ativo</p>
+        </header>
+        
+        <!-- Seção Resumo Geral -->
+        <section class="section">
+            <h2 class="section__title">Resumo Geral</h2>
+            <div class="metrics-grid">
+                <div class="metric-card metric-card--primary">
+                    <div class="metric-card__icon">👥</div>
+                    <div class="metric-card__content">
+                        <div class="metric-card__value metric-total-alunos">12</div>
+                        <div class="metric-card__label">Total Alunos Cadastrados</div>
+                    </div>
+                </div>
+                
+                <div class="metric-card metric-card--info">
+                    <div class="metric-card__icon">📊</div>
+                    <div class="metric-card__content">
+                        <div class="metric-card__value metric-total-analises">12</div>
+                        <div class="metric-card__label">Total Análises Realizadas</div>
+                    </div>
+                </div>
+                
+                <div class="metric-card metric-card--success">
+                    <div class="metric-card__icon">⚠️</div>
+                    <div class="metric-card__content">
+                        <div class="metric-card__value metric-alunos-sem-predicao">0</div>
+                        <div class="metric-card__label">Alunos sem Predição</div>
+                    </div>
+                </div>
+                
+                <div class="metric-card metric-card--warning">
+                    <div class="metric-card__icon">📈</div>
+                    <div class="metric-card__content">
+                        <div class="metric-card__value metric-cobertura-analises">100.0%</div>
+                        <div class="metric-card__label">Cobertura de Análises</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Seção Distribuição de Risco -->
+        <section class="section">
+            <h2 class="section__title">Distribuição de Risco</h2>
+            <div class="risk-section">
+                <div class="chart-container">
+                    <canvas id="riskChart"></canvas>
+                </div>
+                <div class="risk-list">
+                    <div class="risk-item">
+                        <div class="risk-indicator risk-indicator--high"></div>
+                        <div class="risk-content">
+                            <div class="risk-label">Alto Risco</div>
+                            <div class="risk-value risk-alto">3 alunos</div>
+                        </div>
+                    </div>
+                    <div class="risk-item">
+                        <div class="risk-indicator risk-indicator--medium"></div>
+                        <div class="risk-content">
+                            <div class="risk-label">Médio Risco</div>
+                            <div class="risk-value risk-medio">4 alunos</div>
+                        </div>
+                    </div>
+                    <div class="risk-item">
+                        <div class="risk-indicator risk-indicator--low"></div>
+                        <div class="risk-content">
+                            <div class="risk-label">Baixo Risco</div>
+                            <div class="risk-value risk-baixo">5 alunos</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Seção Previsões de Evasão -->
+        <section class="section">
+            <h2 class="section__title">Previsões de Evasão</h2>
+            <div class="predictions-grid">
+                <div class="prediction-card prediction-card--danger">
+                    <div class="prediction-card__icon">🚨</div>
+                    <div class="prediction-card__content">
+                        <div class="prediction-card__value prediction-evasao">4</div>
+                        <div class="prediction-card__label">Evasão Prevista</div>
+                    </div>
+                </div>
+                
+                <div class="prediction-card prediction-card--success">
+                    <div class="prediction-card__icon">✅</div>
+                    <div class="prediction-card__content">
+                        <div class="prediction-card__value prediction-nao-evasao">8</div>
+                        <div class="prediction-card__label">Não Evasão Prevista</div>
+                    </div>
+                </div>
+                
+                <div class="prediction-card prediction-card--warning">
+                    <div class="prediction-card__icon">📊</div>
+                    <div class="prediction-card__content">
+                        <div class="prediction-card__value prediction-taxa-evasao">33.3%</div>
+                        <div class="prediction-card__label">Taxa de Evasão Prevista</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="prediction-chart-container">
+                <canvas id="predictionsChart"></canvas>
+            </div>
+        </section>
+        
+        <!-- Seção Métricas Importantes -->
+        <section class="section">
+            <h2 class="section__title">Métricas Importantes</h2>
+            <div class="main-metric">
+                <div class="main-metric__content">
+                    <h3>Probabilidade Média de Evasão</h3>
+                    <div class="main-metric__value metric-prob-media-evasao">46.7%</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 46.7%"></div>
+                    </div>
+                    <div class="main-metric__description">
+                        Baseado em análise de <span class="metric-base-alunos">12</span> alunos
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Estados de Loading e Erro -->
+        <div class="loading-state" style="display: none;">
+            <div style="text-align: center; padding: 40px;">
+                <div class="header__subtitle">🔄 Carregando dados...</div>
+            </div>
+        </div>
+        
+        <div class="error-state" style="display: none;">
+            <div style="text-align: center; padding: 40px;">
+                <div class="error-message" style="color: var(--color-error);">
+                    Erro ao carregar dados
+                </div>
+                <button class="btn btn--primary" data-action="refresh" style="margin-top: 16px;">
+                    🔄 Tentar Novamente
+                </button>
+            </div>
+        </div>
+        
+        <!-- Elemento para exibir mensagens da API (opcional) -->
+        <div class="api-message" style="display: none; text-align: center; padding: 10px; background: var(--color-bg-3); border-radius: var(--radius-base); margin-top: 20px;">
+        </div>
+    </div>
+    
+    <script src="app.js"></script>
+</body>
+</html>
