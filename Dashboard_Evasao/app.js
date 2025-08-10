@@ -34,7 +34,6 @@ async function loadDashboardData() {
         console.log('🚀 Iniciando requisição...');
         console.log('🌐 URL completa:', apiUrl(API_ENDPOINT));
 
-        // Teste de conectividade básica
         try {
             const healthResponse = await fetch('http://localhost:8000/', {
                 method: 'GET',
