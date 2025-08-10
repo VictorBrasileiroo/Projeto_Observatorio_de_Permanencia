@@ -138,9 +138,25 @@ REST_FRAMEWORK = {
 }
 
 SPECTACULAR_SETTINGS = {
-    'TITLE': 'Observatório de Permanência',
+    'TITLE': 'Observatório de Permanência API',
     'DESCRIPTION': 'API para predição de evasão usando ML',
     'VERSION': '1.0.0',
+    'SERVE_INCLUDE_SCHEMA': False,
+    'COMPONENT_SPLIT_REQUEST': True,
+    'SCHEMA_COERCE_METHOD_NAMES': {
+        'list': 'listar',
+        'create': 'criar',
+        'retrieve': 'buscar',
+        'update': 'atualizar',
+        'destroy': 'remover',
+    },
+    'SCHEMA_COERCE_PATH_PK': False,  
+    'PREPROCESSING_HOOKS': [
+        'drf_spectacular.hooks.preprocess_exclude_path_format',
+    ],
+    'POSTPROCESSING_HOOKS': [
+        'drf_spectacular.hooks.postprocess_schema_enums',
+    ],
 }
 
 CORS_ALLOWED_ORIGINS = [
