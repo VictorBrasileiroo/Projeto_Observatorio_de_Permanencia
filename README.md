@@ -300,7 +300,7 @@ docker-compose up -d --build
 
 ## 📄 Licença
 
-Este projeto está licenciado.
+Este projeto licenciado por MPL-2.0 license.
 
 ***
 
